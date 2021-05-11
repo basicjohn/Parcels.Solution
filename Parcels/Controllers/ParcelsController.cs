@@ -1,31 +1,33 @@
 using Microsoft.AspNetCore.Mvc;
+// using System.Collections.Generic;
 using Parcels.Models;
-using System.Collections.Generic;
+
 
 namespace Parcels.Controllers
 {
   public class ParcelController : Controller
   {
 
-    // [HttpGet("/items")]
-    // public ActionResult Index()
-    // {
-    //   List<Item> allItems = Item.GetAll();
-    //   return View(allItems);
-    // }
+    [HttpGet("/Parcel")]
+    public ActionResult Index()
+    {
+      return View();
+    }
 
-    // [HttpGet("/items/new")]
-    // public ActionResult CreateForm()
-    // {
-    //   return View();
-    // }
+    [HttpGet("/Parcel/create")]
+    public ActionResult CreateForm()
+    {
+      return View();
+    }
 
-    // [HttpPost("/items")]
-    // public ActionResult Create(string description)
-    // {
-    //   Item myItem = new Item(description);
-    //   return RedirectToAction("Index");
-    // }
+    [HttpPost("/Parcel")]
+    public ActionResult CreateForm(int weight, int length, int width, int height)
+    {
+      Parcel parcel = new Parcel();
+      parcel.SetWeight(weight);
+      parcel.SetVolumeWith(length, width, height);
 
+      return RedirectToAction("Index", parcel);
+    }
   }
 }

@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System;
-
 namespace Parcels.Models
 {
   public class Parcel
@@ -8,6 +5,7 @@ namespace Parcels.Models
     private int _volume { get; set; }
     private int _weight { get; set; }
 
+    private double _price { get; set; }
     public Parcel()
     {
 
@@ -23,9 +21,9 @@ namespace Parcels.Models
       _weight = weight;
     }
 
-    public double CostToShip()
+    public void GetPrice()
     {
-      return PricePerPound() + PriceMultiplierPerVolume();
+      _price = PricePerPound() + PricePerVolume();
     }
 
     private double PricePerPound()
@@ -33,23 +31,9 @@ namespace Parcels.Models
       return _weight / 2;
     }
 
-    private double PriceMultiplierPerVolume()
+    private double PricePerVolume()
     {
-      int volume = _volume;
-      switch (volume)
-      {
-        case >= 1000:
-          return 1.50;
-        case >= 850:
-          return 1.25;
-        case >= 700:
-          return 1.00;
-        case >= 500:
-          return 0.75;
-        default:
-          return 0.50;
-
-      }
+      return _volume * 0.15;
 
     }
   }
